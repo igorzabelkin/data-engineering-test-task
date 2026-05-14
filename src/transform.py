@@ -1,20 +1,13 @@
 import pandas as pd
 from pathlib import Path
 
+from src.extract import load_data
+from src.load import save_processed_data
+
 DATA_DIR = Path("data/raw")
 OUTPUT_DIR = Path("data/processed")
 
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
-
-def load_data():
-
-    customers = pd.read_csv(next(DATA_DIR.glob("customers*.csv")))
-    products = pd.read_csv(next(DATA_DIR.glob("products*.csv")))
-    purchases = pd.read_csv(next(DATA_DIR.glob("purchases*.csv")))
-    invoice_items = pd.read_csv(next(DATA_DIR.glob("invoice_items*.csv")))
-
-    return customers, products, purchases, invoice_items
 
 
 def clean_purchases(purchases):
@@ -67,16 +60,6 @@ def build_sales_dataset(customers, products, purchases, invoice_items):
     return sales
 
 
-def save_processed_data(sales):
-
-    output_path = OUTPUT_DIR / "sales_prepared.csv"
-
-    sales.to_csv(output_path, index=False)
-
-    print(f"Processed dataset saved to: {output_path}")
-    print(f"Final dataset shape: {sales.shape}")
-
-
 def validate_sales_dataset(sales):
 
     print("\nValidation checks:")
@@ -100,7 +83,9 @@ def validate_sales_dataset(sales):
     print(sales["line_total"].sum())
 
 
-if __name__ == "__main__":
+
+
+def run_transformation_pipeline():
 
     customers, products, purchases, invoice_items = load_data()
 
@@ -108,18 +93,16 @@ if __name__ == "__main__":
     invoice_items = clean_invoice_items(invoice_items)
 
     sales = build_sales_dataset(
-        customers,
-        products,
-        purchases,
-        invoice_items
-    )
+            customers,
+            products,
+            purchases,
+            invoice_items
+        )
 
     validate_sales_dataset(sales)
 
     save_processed_data(sales)
 
-    print("\nFinal dataset columns:")
-    print(sales.columns.tolist())
 
-    print("\nSample:")
-    print(sales.head())
+    if __name__ == "__main__":
+        run_transformation_pipeline()
