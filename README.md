@@ -41,22 +41,27 @@ data-engineering-test-task/
 ├── main.py
 ├── requirements.txt
 └── README.md
+
 Було використано 4 вхідні таблиці
+
 customers
 products
 purchases
 invoice_items
+
 Під час обробки було реалізовано
+
 приведення типів даних
 конвертацію дат у datetime
 пошук дублювання
 очищення дублікатів
 об’єднання таблиць у фінальний аналітичний датасет
 
-Було виявлено:
-
+Було виявлено
 дублікати
+
 Було реалізовано перевірки
+
 NULL values
 exact duplicates
 аномалії quantity
@@ -65,15 +70,17 @@ exact duplicates
 referential integrity checks
 
 Також було перевірено:
-
 наявність customer_id у customers
 наявність product_id у products
+
 Було реалізовано
+
 Top-N товарів по revenue
 monthly revenue
 category revenue share
 cumulative monthly revenue
 month-over-month growth
+Для аналітики було підготовлено єдиний sales dataset після очищення та об’єднання таблиць.
 
 Результати аналітики зберігаються у:
 
@@ -92,8 +99,8 @@ category_revenue_share.csv
 виконуються cleaning та deduplication
 виконуються chunk-level aggregation
 результати об’єднуються у фінальний aggregate dataset
-SQL
 
+SQL
 Реалізував:
 
 DDL для target tables
