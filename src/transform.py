@@ -20,7 +20,7 @@ def clean_purchases(purchases):
 
     after = len(purchases)
 
-    print(f"Removed exact duplicates: {before - after}")
+    print(f"Removed duplicates: {before - after}")
 
     return purchases
 
@@ -32,7 +32,7 @@ def clean_invoice_items(invoice_items):
 
     after = len(invoice_items)
 
-    print(f"Removed exact invoice_items duplicates: {before - after}")
+    print(f"Removed invoice_items duplicates: {before - after}")
 
     return invoice_items
 
