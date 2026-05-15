@@ -1,10 +1,11 @@
 # Data Engineering Test Task
 
-## Опис проєкту
+# Опис проєкту
 
 В рамках тестового завдання реалізував простий Data Engineering pipeline для обробки та аналітики даних продажів.
 
 Проєкт включає:
+
 - завантаження та підготовку даних
 - очищення та перевірки якості даних
 - побудову підготовленого аналітичного датасету
@@ -16,6 +17,7 @@
 
 # Структура проєкту
 
+```text
 data-engineering-test-task/
 │
 ├── data/
@@ -39,18 +41,12 @@ data-engineering-test-task/
 ├── main.py
 ├── requirements.txt
 └── README.md
-
-
-Було використано 4 вхідні таблиці:
-
+Було використано 4 вхідні таблиці
 customers
 products
 purchases
 invoice_items
-
-===============================
-Під час обробки було реалізовано:
-
+Під час обробки було реалізовано
 приведення типів даних
 конвертацію дат у datetime
 пошук дублювання
@@ -58,11 +54,9 @@ invoice_items
 об’єднання таблиць у фінальний аналітичний датасет
 
 Було виявлено:
-дублі
 
-================================
-Було реалізовано перевірки:
-
+дублікати
+Було реалізовано перевірки
 NULL values
 exact duplicates
 аномалії quantity
@@ -74,69 +68,54 @@ referential integrity checks
 
 наявність customer_id у customers
 наявність product_id у products
-===================================
-
 Було реалізовано
-
 Top-N товарів по revenue
 monthly revenue
 category revenue share
 cumulative monthly revenue
 month-over-month growth
 
-Результати аналітики зберігаються у
+Результати аналітики зберігаються у:
 
 top_products.csv
 monthly_revenue.csv
 category_revenue_share.csv
-=====================================
-
 Робота з великими обсягами даних
 
 Для моделювання обробки великих обсягів даних реалізовав chunk-based processing через pandas chunksize.
 
 Дані обробляв частинами без необхідності завантаження всього файлу в RAM.
 
-Під час chunk processing 
+Під час chunk processing:
 
 дані читаються частинами
 виконуються cleaning та deduplication
 виконуються chunk-level aggregation
 результати об’єднуються у фінальний aggregate dataset
-======================================
-
 SQL
 
-Реалізував
+Реалізував:
 
 DDL для target tables
 Top-N query
 Retention query
 Anti-join query
 cumulative metrics через window functions
-
-=======================================
-
 Pipeline
 
 Pipeline реалізовано через main.py
 
-Основні етапи
+Основні етапи:
 
 Data transformation
 Data quality checks
 Analytics
 
-========================================
-
 Ідемпотентність
 
 Pipeline підтримує повторний запуск без дублювання результатів.
-
-видаляються exact duplicates
+видаляються дублі
 processed файли перезаписуються при кожному запуску
-використовується deterministic transformation logic
 
-=========================================
-
-Запуск pipeline -> python main.py
+Запуск pipeline
+python main.py
